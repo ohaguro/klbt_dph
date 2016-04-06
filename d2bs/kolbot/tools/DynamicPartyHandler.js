@@ -5,9 +5,14 @@
  */
 
 function main() {
+    include("OOG.js");
+    include("json2.js");
     include("common/Config.js");
 
-    var fullGame = 8;
+    print('�c2DynamicPartyHandler loaded');
+    // load custom config constants
+    Config.init(true);
+
     /*
     While the follower_bot is in game, he check if Game is full:
     Case 1: Game is full, one follower_bot leaves the game, waits for the next free game.
@@ -15,11 +20,11 @@ function main() {
      */
     //if bot is leader, disable this part
 
-    if (config.Regulate_party == true) {
-        delay(1000);
-            while (me.inGame == true) {
-                    delay(500);
-                    if (Misc.getPlayerCount() == fullGame) {
+    if (Config.RegulateParty == true) {
+        delay(2000);
+            while (me.ingame == true) {
+                    delay(5000);
+                    if (Misc.getPlayerCount() >= Config.BotFullGame) {
                         print('leaving game for human players...');
                         me.quit();
                     }
