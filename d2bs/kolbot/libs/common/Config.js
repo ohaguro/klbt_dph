@@ -106,7 +106,9 @@ var Config = {
 		}
 	},
 	// Dynamic Party Handler
-	Regulate_party: true,
+	RegulateParty: true,
+	BotFullGame: 0,
+
 
 	// Time
 	StartDelay: 0,
