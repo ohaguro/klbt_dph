@@ -139,6 +139,7 @@ function main() {
 	load("tools/ToolsThread.js");
 
     if (Config.Regulate_party) {
+        print("�c1loading DynamicPartyHandler ...");
         load("tools/DynamicPartyHandler.js");
     }
 
