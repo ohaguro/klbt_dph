@@ -108,6 +108,7 @@ var Config = {
 	// Dynamic Party Handler
 	RegulateParty: true,
 	BotLeaveGame: 3,
+	RegulateDelta: 0,
 
 
 	// Time
