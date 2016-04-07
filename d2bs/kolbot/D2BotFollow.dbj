@@ -50,7 +50,7 @@ var AdvancedConfig = {
 
 var RegulateLeaders = {
     "Filler": ["Leaders"]
-}
+};
 
 
 // No touchy!
@@ -392,7 +392,14 @@ MainSwitch:
                 if (RegulateLeaders.hasOwnProperty(i) && typeof i === "string") {
                         if (RegulateLeaders[i] === me.profile) {
                             for (j = 0; j < RegulateLeaders[i].length; j += 1) {
-                                print(D2Bot.requestGame(j).)
+								print('checking first leader game ' + leaders[j])
+                                var delta = ((D2Bot.requestGame(j).getTickCount() - D2Bot.requestGame(j).gamestarttime())/1000);
+								if (delta < Config.RegulateDelta) {
+									print('good delta, joining ' + leaders[j]);
+									leader.push(j);
+								} else {
+									print('bad delta, still searching...');
+								}
                                 /*was ist jetzt zu tun?
                                 für jeden Leader hole dir GameInfo.
                                 berechne den delta(AverageGametime * percentage).
@@ -404,9 +411,8 @@ MainSwitch:
                                     */
                             }
                         }
-                    }
-                }
-            }
+				}
+			}
         } else {
             if (!leader) {
                 leader = [];
