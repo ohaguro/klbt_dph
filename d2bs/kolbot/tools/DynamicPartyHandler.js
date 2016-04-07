@@ -21,15 +21,19 @@ function main() {
     Case 2: Game is not full, keep staying in game. Everything goes like before.
      */
     //if bot is leader, disable this part
-
     if (Config.RegulateParty == true) {
         delay(2000);
+        if (Config.BotFullGame <= 2 || Config.BotFullGame > 8) {
+            throw new Error("Chose BotLeaveGame between 3 and 8");
+            print('DynamicPartyHandler approved correct configuration...');
+        } else {
             while (me.ingame == true) {
-                    delay(3000);
-                    if (Misc.getPlayerCount() >= Config.BotFullGame) {
-                        print('<FF>c1leaving game for human players...');
-                        quit();
-                    }
+                delay(3000);
+                if (Misc.getPlayerCount() >= Config.BotFullGame) {
+                    print('<FF>c1leaving game for human players...');
+                    quit();
+                }
             }
+        }
     }
 }
