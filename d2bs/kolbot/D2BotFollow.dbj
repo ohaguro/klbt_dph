@@ -48,6 +48,9 @@ var AdvancedConfig = {
 
 };
 
+var RegulateLeaders = {
+    "Filler": ["Leaders"]
+}
 
 
 // No touchy!
@@ -384,20 +387,41 @@ MainSwitch:
 		break;
 	case 5: // Join Game
 		D2Bot.updateStatus("Join Game");
+        if (Config.RegulateParty == true) {
+            for (i in RegulateLeaders) {
+                if (RegulateLeaders.hasOwnProperty(i) && typeof i === "string") {
+                        if (RegulateLeaders[i] === me.profile) {
+                            for (j = 0; j < RegulateLeaders[i].length; j += 1) {
+                                print(D2Bot.requestGame(j).)
+                                /*was ist jetzt zu tun?
+                                für jeden Leader hole dir GameInfo.
+                                berechne den delta(AverageGametime * percentage).
+                                (1) current game time kleiner als delta setze den leader.
+                                    Breake loop.
+                                    Join Game.
+                                (2) current game time ist größer als delta.
+                                    gehe zum nächsten lead game.
+                                    */
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if (!leader) {
+                leader = [];
 
-		if (!leader) {
-			leader = [];
-
-			for (i in JoinSettings) {
-				if (JoinSettings.hasOwnProperty(i) && typeof i === "string") {
-					for (j = 0; j < JoinSettings[i].length; j += 1) {
-						if (JoinSettings[i][j] === me.profile || JoinSettings[i][j] === "all") {
-							leader.push(i);
-						}
-					}
-				}
-			}
-		}
+                for (i in JoinSettings) {
+                    if (JoinSettings.hasOwnProperty(i) && typeof i === "string") {
+                        for (j = 0; j < JoinSettings[i].length; j += 1) {
+                            if (JoinSettings[i][j] === me.profile || JoinSettings[i][j] === "all") {
+                                leader.push(i);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 		if (!leader || !leader.length) {
 			break;
