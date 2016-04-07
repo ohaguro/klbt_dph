@@ -8,8 +8,10 @@ function main() {
     include("OOG.js");
     include("json2.js");
     include("common/Config.js");
+    include("common/Misc.js");
 
-    print('�c2DynamicPartyHandler loaded');
+
+    print('<FF>c2DynamicPartyHandler loaded');
     // load custom config constants
     Config.init(true);
 
@@ -23,10 +25,10 @@ function main() {
     if (Config.RegulateParty == true) {
         delay(2000);
             while (me.ingame == true) {
-                    delay(5000);
+                    delay(3000);
                     if (Misc.getPlayerCount() >= Config.BotFullGame) {
-                        print('leaving game for human players...');
-                        me.quit();
+                        print('<FF>c1leaving game for human players...');
+                        quit();
                     }
             }
     }
