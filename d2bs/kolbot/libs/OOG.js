@@ -273,7 +273,7 @@ var D2Bot = {
 			args: []
 		};
 
-		//print("ÿc1Heart beat " + this.handle);
+		//print("ï¿½c1Heart beat " + this.handle);
 		sendCopyData(null, this.handle, 0, JSON.stringify(obj));
 	},
 
@@ -342,6 +342,18 @@ var D2Bot = {
 			profile: me.profile,
 			func: "delete",
 			args: [me.profile]
+		};
+
+		sendCopyData(null, this.handle, 0, JSON.stringify(obj));
+	},
+
+	// Request time game is running
+	requestGameTime: function () {
+		var obj = {
+			profile: me.profile,
+			time: ((me.gamestarttime - me.profile.getTickCount)/1000),
+			func: "requestGameTime",
+			args: []
 		};
 
 		sendCopyData(null, this.handle, 0, JSON.stringify(obj));
