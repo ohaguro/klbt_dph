@@ -294,11 +294,12 @@ var D2Bot = {
 	},
 
 	// Profile to profile communication
-	joinMe: function (profile, gameName, gameCount, gamePass, isUp) {
+	joinMe: function (profile, gameName, gameCount, gamePass, isUp, time) {
 		var obj = {
 			gameName: gameName + gameCount,
 			gamePass: gamePass,
-			inGame: isUp === "yes"
+			inGame: isUp === "yes",
+			time: time
 		};
 
 		sendCopyData(null, profile, 1, JSON.stringify(obj));
@@ -345,18 +346,6 @@ var D2Bot = {
 		};
 
 		sendCopyData(null, this.handle, 0, JSON.stringify(obj));
-	},
-
-	// Request time game is running
-	requestGameTime: function () {
-		var obj = {
-			profile: me.profile,
-			time: ((me.gamestarttime - me.profile.getTickCount)/1000),
-			func: "requestGameTime",
-			args: []
-		};
-
-		sendCopyData(null, this.handle, 0, JSON.stringify(obj));
 	}
 };
 
@@ -375,7 +364,8 @@ var DataFile = {
 			gameName: "",
 			ingameTick: 0,
 			handle: 0,
-			nextGame: ""
+			nextGame: "",
+			time: 0
 		};
 
 		string = JSON.stringify(obj);
