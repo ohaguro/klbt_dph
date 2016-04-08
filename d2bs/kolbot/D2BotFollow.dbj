@@ -163,7 +163,7 @@ function ReceiveCopyData(mode, msg) {
 		if (gameInfo) {
 			obj = JSON.parse(msg);
 
-			D2Bot.joinMe(obj.profile, me.gamename || "", "", me.gamepassword || "", me.gameReady ? "yes" : "no");
+			D2Bot.joinMe(obj.profile, me.gamename || "", "", me.gamepassword || "", me.gameReady ? "yes" : "no", ((me.gamestarttime - getTickCount())/1000));
 		}
 
 		break;
@@ -393,27 +393,14 @@ MainSwitch:
                 if (RegulateLeaders.hasOwnProperty(i) && typeof i === "string") {
                         if (i === me.profile) {
                             for (j = 0; j < RegulateLeaders[i].length; j += 1) {
-								print('checking first leader game ' + leaders[i][j]);
-								var temp_leader = RegulateLeaders[i][j];
-								print(temp_leader);
-								D2Bot.requestGameInfo(RegulateLeaders[i][j]);
-								print(obj.time);
-                                //var delta = ((D2Bot.requestGameTime(temp_leader).time - D2Bot.requestGameTime())/1000);
-								if (delta < Config.RegulateDelta) {
+								print('checking first leader game ' + RegulateLeaders[i][j]);
+								D2Bot.requestGame(RegulateLeaders[i][j]);
+								if (joinInfo.time < Config.RegulateDelta) {
 									print('good delta, joining ' + leaders[j]);
 									leader.push(j);
 								} else {
 									print('bad delta, still searching...');
 								}
-                                /*was ist jetzt zu tun?
-                                für jeden Leader hole dir GameInfo.
-                                berechne den delta(AverageGametime * percentage).
-                                (1) current game time kleiner als delta setze den leader.
-                                    Breake loop.
-                                    Join Game.
-                                (2) current game time ist größer als delta.
-                                    gehe zum nächsten lead game.
-                                    */
                             }
                         }
 				}
