@@ -61,6 +61,7 @@ include("gambling.js");
 include("craftingsystem.js");
 include("torchsystem.js");
 include("common/misc.js");
+include("common/Config.js");
 
 var i, j, gameInfo, joinInfo, gameStart, ingame, handle,
 	firstLogin, chatActionsDone, lastGameTick, connectFail,
@@ -390,10 +391,11 @@ MainSwitch:
         if (Config.RegulateParty == true) {
             for (i in RegulateLeaders) {
                 if (RegulateLeaders.hasOwnProperty(i) && typeof i === "string") {
-                        if (RegulateLeaders[i] === me.profile) {
+                        if (i === me.profile) {
                             for (j = 0; j < RegulateLeaders[i].length; j += 1) {
-								print('checking first leader game ' + leaders[j])
-                                var delta = ((D2Bot.requestGame(j).getTickCount() - D2Bot.requestGame(j).gamestarttime())/1000);
+								print('checking first leader game ' + leaders[i][j]);
+								var temp_leader = RegulateLeaders[i][j];
+                                var delta = ((D2Bot.requestGameTime(temp_leader).Time - D2Bot.requestGameTime())/1000);
 								if (delta < Config.RegulateDelta) {
 									print('good delta, joining ' + leaders[j]);
 									leader.push(j);
